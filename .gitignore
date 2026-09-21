@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+
+# 生成的申报材料
+软著申请文档/
+*.docx
+
+# 编辑器
+.vscode/
+.idea/

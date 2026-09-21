@@ -1,0 +1,7 @@
+# 统一换行符，避免 Windows / macOS / Linux 协作者之间产生无意义的整文件 diff
+* text=auto
+
+*.png binary
+*.jpg binary
+*.docx binary
+*.xlsx binary

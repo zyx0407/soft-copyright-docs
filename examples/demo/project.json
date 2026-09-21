@@ -1,0 +1,90 @@
+{
+  "name": "学生成绩统计分析工具",
+  "name_en": "Student Score Statistics Toolkit",
+  "version": "V1.0",
+  "language": "Python 3.10+",
+  "developer": "",
+  "completion_date": "",
+
+  "output_dir": "软著申请文档",
+
+  "summary": "学生成绩统计分析工具是一款用于汇总与统计分析学生成绩的命令行软件。它能把多个成绩文件（CSV / Excel）按学号自动对齐合并，计算均值、标准差、中位数、四分位数与变异系数，按指定判据筛查异常成绩，并把统计结果导出为 Word 报告。软件不依赖任何第三方科学计算库，仅使用 Python 标准库完成全部统计运算。",
+  "hardware": [
+    "CPU：Intel Core i3 及以上",
+    "内存：2 GB 及以上",
+    "硬盘：可用空间 ≥ 100 MB"
+  ],
+  "software": [
+    "操作系统：Windows 10 / 11、macOS 或 Linux",
+    "运行环境：Python 3.10 及以上",
+    "可选依赖：读取 Excel 文件需要 openpyxl"
+  ],
+
+  "features": [
+    {"title": "多文件自动合并", "detail": "一次读入目录下所有成绩文件，按学号对齐合并，字段取并集。"},
+    {"title": "自然序排列", "detail": "学号按数值大小排序，2 号排在 10 号之前，而不是按字符串比较。"},
+    {"title": "描述性统计", "detail": "输出样本数、均值、标准差、中位数、四分位数与变异系数。"},
+    {"title": "异常值筛查", "detail": "提供四分位距（IQR）与 3σ 两种判据，异常成绩单独列出。"},
+    {"title": "Word 报告导出", "detail": "把数据概览、统计表与文字结论整理成一份 Word 报告。"}
+  ],
+  "glossary": [
+    {"term": "CV", "full": "Coefficient of Variation", "desc": "变异系数，标准差与均值之比，用于比较不同量纲数据的离散程度。"},
+    {"term": "IQR", "full": "Interquartile Range", "desc": "四分位距，第三四分位数与第一四分位数之差。"},
+    {"term": "σ", "full": "Standard Deviation", "desc": "标准差，衡量数据偏离均值的程度。"}
+  ],
+
+  "modules": [
+    {
+      "id": "1",
+      "name": "数据导入与合并",
+      "desc": "读入指定目录下的全部成绩文件，按学号对齐后合并为一张表，并报告每个文件的读入情况。",
+      "steps": [
+        "把需要统计的成绩文件放在同一个目录下。",
+        "在命令行执行 python main.py summary 数据目录。",
+        "软件逐个读入文件并提示读入结果，读不了的文件会跳过并给出原因。",
+        "读入完成后按学号合并，输出记录数与字段数。"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "描述性统计",
+      "desc": "自动识别数值列并计算描述性统计量，以表格形式输出。",
+      "steps": [
+        "接续上一步，无需额外参数。",
+        "软件自动挑出数值列（至少一半的值可以转成数字）。",
+        "输出均值、标准差、中位数、四分位数与变异系数。",
+        "同时给出文字结论，说明每个变量的离散程度。"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "异常值筛查",
+      "desc": "按四分位距或 3σ 判据找出异常成绩。",
+      "steps": [
+        "默认使用四分位距判据，可直接运行。",
+        "如需改用标准差判据，加上参数 --method sigma。",
+        "软件在统计表之后列出被判为异常的数值。"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "报告导出",
+      "desc": "把本次分析的结果整理成 Word 报告，包含数据概览、统计表与结论三部分。",
+      "steps": [
+        "执行 python main.py export 数据目录 输出报告.docx。",
+        "可用 --title 参数自定义报告标题。",
+        "软件在指定路径生成 Word 报告，并打印文件位置。"
+      ]
+    }
+  ],
+
+  "source": {
+    "dirs": ["src"],
+    "include": ["**/*.py"],
+    "exclude": ["**/__pycache__/**"],
+    "order": ["src/main.py", "src/data_loader.py", "src/stats.py", "src/report.py"],
+    "lines_per_page": 55,
+    "first_pages": 30,
+    "last_pages": 30
+  }
+}
