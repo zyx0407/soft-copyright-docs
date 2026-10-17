@@ -1,5 +1,7 @@
 # soft-copyright-docs
 
+[English](README.en.md) · 简体中文
+
 从源码目录一键生成**软件著作权登记**所需的四份材料。
 
 ```bash
