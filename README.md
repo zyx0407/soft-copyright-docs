@@ -104,6 +104,35 @@ python -m ruanzhu -c examples/demo/project.json
 
 ---
 
+## 生成完先自检
+
+```bash
+python verify_materials.py 软著申请文档
+```
+
+查机器能查的那一半：四份文件在不在、是不是空壳、四份的软件名与版本号是否一致、源程序文档页码是否连续、每页标题与页脚对不对得上、代码行号是否从 1 连续编到末尾。
+
+```bash
+python verify_materials.py 软著申请文档 --name 我的软件 --version V1.0   # 顺带核名称/版本
+```
+
+有 `FAIL` 说明材料不能交，`WARN` 看一眼再决定。目录域和截图它查不了，退出时会单独提示。
+
+---
+
+## 交给 AI 助手用
+
+仓库根带一份 `SKILL.md`（Agent Skill 格式：`name` + `description` + 工作流）。给支持该格式的助手装上之后，它会按流程问齐字段、写 `project.json`、生成，再跑上面的自检：
+
+```bash
+# 例：克隆到助手的 skills 目录
+git clone https://github.com/zyx0407/soft-copyright-docs.git ~/.claude/skills/soft-copyright-docs
+```
+
+手动用也完全一样，`SKILL.md` 就是这份 README 的「问答版」。
+
+---
+
 ## 配置字段
 
 ### 基本信息
@@ -201,6 +230,8 @@ soft-copyright-docs/
 │   └── screenshot_doc.py  界面截图文档
 ├── examples/demo/         可直接跑通的示例项目
 ├── tests/                 测试
+├── SKILL.md               给 AI 助手用的 skill 说明
+├── verify_materials.py    生成后的机器自检
 └── project.example.json   填好的配置示例
 ```
 

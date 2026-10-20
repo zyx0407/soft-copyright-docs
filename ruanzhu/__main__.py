@@ -124,8 +124,18 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _utf8_stdout() -> None:
+    """Windows 下把 stdout/stderr 固定成 UTF-8，否则中文输出会被按 ANSI 解码成乱码。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8")  # type: ignore[union-attr]
+        except (AttributeError, ValueError):
+            pass
+
+
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    _utf8_stdout()
 
     if args.init:
         target = Path.cwd() / "project.json"

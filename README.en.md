@@ -104,6 +104,35 @@ python -m ruanzhu -c examples/demo/project.json
 
 ---
 
+## Check before you submit
+
+```bash
+python verify_materials.py 软著申请文档
+```
+
+It checks the half a machine can check: all four files are present and not empty shells; the software name and version agree across all four; page numbers in the source-code document are continuous; every page title matches its page footer; line numbers run from 1 to the end with no gap.
+
+```bash
+python verify_materials.py 软著申请文档 --name "My Software" --version V1.0   # also cross-check name/version
+```
+
+`FAIL` means the material should not be submitted yet; `WARN` is worth a look. Table-of-contents fields and screenshots cannot be checked automatically and are listed at the end of the report.
+
+---
+
+## Use it with an AI assistant
+
+The repository root ships a `SKILL.md` (Agent Skill format: `name`, `description`, workflow). Once it is installed into a compatible assistant, the assistant asks for the required fields, writes `project.json`, generates the documents and runs the self-check above:
+
+```bash
+# example: clone into an assistant's skills directory
+git clone https://github.com/zyx0407/soft-copyright-docs.git ~/.claude/skills/soft-copyright-docs
+```
+
+Working by hand is exactly the same — `SKILL.md` is just the Q&A version of this README.
+
+---
+
 ## Config fields
 
 ### Basics
@@ -201,6 +230,8 @@ soft-copyright-docs/
 │   └── screenshot_doc.py  screenshot document
 ├── examples/demo/         runnable example project
 ├── tests/                 tests
+├── SKILL.md               skill description for AI assistants
+├── verify_materials.py    post-generation self-check
 └── project.example.json   filled-in example config
 ```
 
